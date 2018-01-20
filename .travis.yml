@@ -2,12 +2,15 @@ sudo: required
 services:
   - docker
 
+env:
+  - COMMIT=${TRAVIS_COMMIT::8}
+  - REPO=consbio/python3.6-gdal2
+
 script: 
-  - travis_wait 60 docker build -t python3.6-gdal2 .
+  - travis_wait 60 docker build -t $REPO:$COMMIT .
 
 after_success:
-  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-  - export REPO=consbio/python3.6-gdal2
+  - docker login -u $DOCKER_USER -p $DOCKER_PASS
   - docker tag $REPO:$COMMIT $REPO:latest
   - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
   - docker push $REPO
