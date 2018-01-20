@@ -58,4 +58,4 @@ RUN cd src && tar -xvf gdal-${GDAL_VERSION}.tar.gz && cd gdal-${GDAL_VERSION} \
     && cd $ROOTDIR && rm -Rf src/gdal*
 # End GDAL2 install
 
-pip install GDAL==${PYTHON_GDAL_VERSION}
+RUN pip install GDAL==${PYTHON_GDAL_VERSION}
