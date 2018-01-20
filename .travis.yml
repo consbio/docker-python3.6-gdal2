@@ -3,7 +3,7 @@ services:
   - docker
 
 script: 
-  - travis_wait 30 docker build -t python3.6-gdal2 .
+  - travis_wait 60 docker build -t python3.6-gdal2 .
 
 after_success:
   - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS

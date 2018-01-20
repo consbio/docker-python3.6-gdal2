@@ -1,7 +1,5 @@
 FROM python:3.6
 
-ENV PYTHON_GDAL_VERSION 2.2.3
-
 # Install GDAL2, taken from : https://github.com/GeographicaGS/Docker-GDAL2/blob/master/2.2.3/Dockerfile
 ENV ROOTDIR /usr/local/
 ENV GDAL_VERSION 2.2.3
