@@ -55,3 +55,7 @@ RUN cd src && tar -xvf gdal-${GDAL_VERSION}.tar.gz && cd gdal-${GDAL_VERSION} \
     && python3 setup.py install \
     && cd $ROOTDIR && rm -Rf src/gdal*
 # End GDAL2 install
+
+# Cleanup
+RUN apt-get remove -y cmake bash-completion wget software-properties-common python-software-properties \
+	python3-software-properties build-essential
