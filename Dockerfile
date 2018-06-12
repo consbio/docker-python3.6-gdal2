@@ -14,7 +14,6 @@ ADD https://github.com/uclouvain/openjpeg/archive/v${OPENJPEG_VERSION}.tar.gz $R
 # Install basic dependencies
 RUN apt-get update -y && apt-get install -y \
     software-properties-common \
-    python-software-properties \
     python3-software-properties \
     build-essential \
     python-dev \
@@ -57,5 +56,4 @@ RUN cd src && tar -xvf gdal-${GDAL_VERSION}.tar.gz && cd gdal-${GDAL_VERSION} \
 # End GDAL2 install
 
 # Cleanup
-RUN apt-get remove -y cmake bash-completion wget software-properties-common python-software-properties \
-	python3-software-properties build-essential
+RUN apt-get remove -y cmake bash-completion wget software-properties-common python3-software-properties build-essential
