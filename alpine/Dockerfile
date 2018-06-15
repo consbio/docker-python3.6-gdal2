@@ -1,8 +1,12 @@
-FROM python:3.6-alpine
+ARG python_version=3.6
+
+FROM python:${python_version}-alpine
+
+ARG gdal_version=2.2.3
 
 # Install GDAL2, taken from : https://github.com/GeographicaGS/Docker-GDAL2/blob/master/2.2.3/Dockerfile
 ENV ROOTDIR /usr/local/
-ENV GDAL_VERSION 2.2.3
+ENV GDAL_VERSION $gdal_version
 ENV OPENJPEG_VERSION 2.2.0
 
 # Load assets

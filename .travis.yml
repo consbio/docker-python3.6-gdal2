@@ -4,14 +4,23 @@ services:
 
 env:
   global:
-    - COMMIT=${TRAVIS_COMMIT::8}
+    - JOB=${TRAVIS_JOB_NUMBER}
     - REPO=consbio/python3.6-gdal2
+    - PYTHON_VERSION=3.6.5
+    - GDAL_VERSION=2.2.3
+  matrix:
+    - DIST=alpine
+    - DIST=stretch
 
 script: 
-  - travis_wait 60 docker build -t $REPO:$COMMIT .
+  - travis_wait 60 docker build -t $REPO:$JOB $DIST \
+    --build-arg python_version=$PYTHON_VERSION \
+    --build-arg=gdal_version=$GDAL_VERSION
 
 after_success:
   - docker login -u $DOCKER_USER -p $DOCKER_PASS
-  - docker tag $REPO:$COMMIT $REPO:latest
-  - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+  - docker tag $REPO:$JOB $REPO:travis-$TRAVIS_BUILD_NUMBER
+  - docker tag $REPO:$JOB $REPO:$DIST
+  - |
+    if [ "$DIST" == "stretch" ]; then docker tag $REPO:$JOB $REPO:latest; fi
   - docker push $REPO
